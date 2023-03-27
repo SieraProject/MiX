@@ -10,7 +10,7 @@
 //= One-click automatic mount rentals.
 //============================================================
 
-prontera,139,173,6	script	Universal Rental NPC	726,{
+firstcity,207,221,4	script	Universal Rental NPC	4_M_DST_TOUGH,{
 	if (ismounting()) {
 		message strcharinfo(0),"You must first remove your mount.";
 		end;
@@ -36,4 +36,15 @@ prontera,139,173,6	script	Universal Rental NPC	726,{
 	}
 	specialeffect2 EF_TEIHIT3;
 	end;
+}
+
+firstcity,206,221,4	script	ลาดุดัน	4_DONKEY,{
+end;
+Oninit:
+    setarray .Messages$[0],"[ลาดุดัน] มารับสัตว์เลี้ยงของท่านได้ที่นี้","[ลาดุดัน] อย่าเรื่องมากสิเจ้านายของข้ากำลังโมโห !!";
+    while (1) {
+        npctalk .Messages$[rand(getarraysize(.Messages$))];
+        sleep 8000;
+    }
+    end;
 }

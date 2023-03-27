@@ -1,0 +1,41 @@
+//===== Developers Script ===================================
+//= Server Rate
+//===== Current Version =====================================
+//= 1.0
+//===== Description =========================================
+//= Server Rate
+//===== Additional Comments =================================
+//= 1.0 Start Version
+//= 1.1 Edit By Ragnarok PVP GVG
+//===========================================================
+
+-	script	Warp-GVG	-1,{
+	mes "[ ^FF0000ลานประลอง^000000 ]";
+	mes "ระบบการต่อสู้ระหว่างผู้เล่น";
+	mes "ไว้สำหรับทดสอบดาเมจต่างๆ";
+	switch(select("Holy Shadow ^FF0000["+getmapusers("payg_cas03")+"]^000000 คน:Eeyolbriggar ^FF0000["+getmapusers("gefg_cas02")+"]^000000 คน:ออก")){
+	case 1:
+		warp "payg_cas03",0,0;
+		//npctalk "Diary Talk : คุณ "+strcharinfo(0)+" ได้เข้าลานประลอง PvP Izlude !";
+		//mapannounce "morocc","[ PvP ROOM : คุณ "+strcharinfo(0)+" ได้เข้าลานประลอง เมือง Izlude ! ]",bc_map;
+		end;
+	case 2:
+		warp "gefg_cas02",0,0;
+		//npctalk "Diary Talk : คุณ "+strcharinfo(0)+" ได้เข้าลานประลอง Death Match  !";
+		//mapannounce "morocc","[ PvP ROOM : คุณ "+strcharinfo(0)+" ได้เข้าลานประลอง Death Match ]",bc_map;
+		end;
+	case 3:
+	end;
+	}
+
+OnInit:
+	while (1) {
+		delwaitingroom;
+		set .@count, getmapusers("payg_cas03");
+		waitingroom "กิลด์วอร์ "+ .@count + ((.@count==1) ? " คน" : " คน") +"",0;
+		sleep 1000;
+	}
+end;
+}
+
+firstcity,224,218,4	duplicate(Warp-GVG)	Guild War#00	966
