@@ -1,5 +1,5 @@
 // Monster Dynamic Damage (5 = 1~5% Damage Reduction and x1~5 Damage (Set on spawn)
-max_monster_dynamic: 3
+max_monster_dynamic: 5
 
 // Monster Damage Multiplier (1 = Multiply Damage by x1)
 tb_monster_damage_multiplier: 3
