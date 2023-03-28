@@ -64930,19 +64930,19 @@ Body:
     Ai: 03
     Drops:
       - Item: Bill_Of_Birds
-        Rate: 10000
+        Rate: 9000
       - Item: Sandals_
-        Rate: 50
+        Rate: 20
       - Item: Yellow_Herb
-        Rate: 500
+        Rate: 200
       - Item: Wing_Of_Fly
-        Rate: 2500
+        Rate: 900
       - Item: Wand
-        Rate: 250
+        Rate: 100
       - Item: Orange
-        Rate: 2500
+        Rate: 1000
       - Item: Pecopeco_Card
-        Rate: 5
+        Rate: 1
         StealProtected: true
   - Id: 2719
     AegisName: C1_PASANA
@@ -69160,17 +69160,17 @@ Body:
     Ai: 03
     Drops:
       - Item: Peco_Wing_Feather
-        Rate: 10000
+        Rate: 4850
       - Item: Fruit_Of_Mastela
-        Rate: 750
+        Rate: 300
       - Item: Wind_Of_Verdure
-        Rate: 2500
+        Rate: 1000
       - Item: Gold
         Rate: 1
       - Item: Orange
-        Rate: 1250
+        Rate: 500
       - Item: Grand_Peco_Card
-        Rate: 5
+        Rate: 1
         StealProtected: true
   - Id: 2811
     AegisName: C3_GRAND_PECO
