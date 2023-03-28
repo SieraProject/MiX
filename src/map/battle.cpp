@@ -33,6 +33,7 @@
 #include "pc.hpp"
 #include "pc_groups.hpp"
 #include "pet.hpp"
+#include "npc.hpp"
 
 struct Battle_Config battle_config;
 static struct eri *delay_damage_ers; //For battle delay damage structures.
@@ -10597,6 +10598,13 @@ int battle_check_target( struct block_list *src, struct block_list *target,int f
 	//Alliance state takes precedence over enemy one.
 	else if( state&BCT_ENEMY && strip_enemy && state&(BCT_SELF|BCT_PARTY|BCT_GUILD) )
 		state&=~BCT_ENEMY;
+
+	if ( s_bl->type == BL_PC && t_bl->type == BL_MOB ) {
+		map_session_data *sd = BL_CAST( BL_PC, s_bl );
+		mob_data *md = BL_CAST( BL_MOB, t_bl );
+		if ( npc_isnear(&sd->bl) )
+				state &= ~BCT_ENEMY;
+	}
 
 	return (flag&state)?1:-1;
 }
