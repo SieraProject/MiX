@@ -135,7 +135,7 @@ Vip:
 		explode(.@array$, .items$[.@i], ":");
 		.@menu$ += ":"+getitemname(atoi(.@array$[0]));
 	}
-	.@s = select(.@menu$+":Buy Buff Cash.:do not accept.")-2;
+	.@s = select(.@menu$+":do not accept.")-1;
 	if(.@s == getarraysize(.items$)) {
 		mes "[Fever Banshee]";
 		mes "You're a solid man. Okay.";
