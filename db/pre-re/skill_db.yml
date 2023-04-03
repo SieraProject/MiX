@@ -16621,6 +16621,23 @@ Body:
     Name: NPC_DANCINGBLADE_ATK
     Description: Dancing Blade Attack
     MaxLevel: 1
+  - Id: 715
+    Name: NPC_DARKPIERCING
+    Description: Dark Piercing
+    MaxLevel: 1
+    Type: Weapon
+    TargetType: Attack
+    DamageFlags:
+      Splash: true
+    Flags:
+      IsNpc: true
+    Range: 3
+    Hit: Single
+    HitCount: 1
+    SplashArea: 2
+    ActiveInstance: 14
+    CastCancel: true
+    AfterCastActDelay: 2000
   - Id: 716
     Name: NPC_MAXPAIN
     Description: Max Pain
@@ -16649,6 +16666,39 @@ Body:
     Hit: Single
     HitCount: 1
     SplashArea: 18
+  - Id: 718
+    Name: NPC_DEATHSUMMON
+    Description: Death Summon
+    MaxLevel: 10
+    Type: Magic
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    HitCount: 1
+  - Id: 719
+    Name: NPC_HELLBURNING
+    Description: Hell Burning
+    MaxLevel: 1
+    Type: Magic
+    TargetType: Self
+    Flags:
+      IsNpc: true
+      IgnoreLandProtector: true
+    Hit: Single
+    HitCount: 1
+    Element: Fire
+    Duration1: 3000
+    Unit:
+      Id: Hellburning
+      Layout: 1
+      Interval: 20
+      Target: Enemy
+      Flag:
+        NoOverlap: true
+        PathCheck: true
+        RangedSingleUnit: true
   - Id: 720
     Name: NPC_JACKFROST
     Description: Jack Frost 2

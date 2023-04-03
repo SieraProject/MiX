@@ -20579,7 +20579,8 @@ void roulette_generate_bonus( map_session_data& sd ){
 void clif_roulette_open( map_session_data* sd ){
 	nullpo_retv( sd );
 
-	roulette_generate_bonus( *sd );
+	if (!sd->roulette.claimPrize)
+		roulette_generate_bonus( *sd );
 
 	struct packet_roulette_open_ack p;
 
@@ -20772,7 +20773,7 @@ void clif_parse_roulette_generate( int fd, map_session_data* sd ){
 	}
 
 	// Player has not claimed his prize yet
-	if( sd->roulette.claimPrize ){
+	if( !sd->roulette.stage && sd->roulette.claimPrize ){
 		clif_roulette_getitem( sd );
 	}
 
@@ -20801,11 +20802,12 @@ void clif_parse_roulette_generate( int fd, map_session_data* sd ){
 				pc_setreg2(sd, ROULETTE_GOLD_VAR, sd->roulette_point.gold);
 			}
 		}
+		int8 idx = rd.chance_table[sd->roulette.stage][rand() % rd.chance_table[sd->roulette.stage].size()];
 
 		sd->roulette.prizeStage = sd->roulette.stage;
-		sd->roulette.prizeIdx = rnd()%rd.items[sd->roulette.stage];
+		sd->roulette.prizeIdx = idx;
 		sd->roulette.claimPrize = true;
-		sd->roulette.tick = gettick() + i64max( 1, ( MAX_ROULETTE_COLUMNS - sd->roulette.prizeStage - 3 ) ) * 1000;
+		sd->roulette.tick = gettick() + i64max( 1, ( MAX_ROULETTE_COLUMNS - sd->roulette.prizeStage - 3 ) ) * battle_config.feature_roulette_spin_tick;
 
 		if( rd.flag[sd->roulette.stage][sd->roulette.prizeIdx]&1 ){
 			result = GENERATE_ROULETTE_LOSING;

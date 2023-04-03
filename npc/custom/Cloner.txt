@@ -1,0 +1,7 @@
+prontera,150,150,4	script	Cloner	989,{
+	clone "prontera",150,150, "Cloner::OnCloneDie", getcharid(0);
+	end;
+
+OnCloneDie:
+	end;
+}

@@ -88,6 +88,36 @@ Header:
   Version: 3
 
 Body:
+#Item Vending
+  - Id: 30000
+    AegisName: Zeny
+    Name: Zeny
+    Type: Etc
+    Weight: 1
+  - Id: 30001
+    AegisName: Cash
+    Name: Cash
+    Type: Usable
+    Flags:
+      DropEffect: RED_PILLAR
+    Script: |
+      .@i = 30001; dispbottom "[System] : You got "+ callfunc("F_InsertComma",(countitem(.@i)+1)) +" Cash Points";
+      #CASHPOINTS += (countitem(.@i) + 1);
+      delitem .@i,countitem(.@i);
+      dispbottom  "[System] : You have "+ callfunc("F_InsertComma",#CASHPOINTS) +" Cash Points";
+  - Id: 30002
+    AegisName: Cash_1MP
+    Name: Cash 1000000 Points
+    Type: Usable
+    Flags:
+      DropEffect: RED_PILLAR
+    Script: |
+      .@p = 1000000;
+      .@i = 30004;
+      dispbottom "[System] : คุณได้รับ Cash "+ callfunc("F_InsertComma",(countitem(.@i)*(.@p)+(.@p))) +" Cash Points";
+      #CASHPOINTS += (countitem(.@i)*(.@p)+(.@p));
+      delitem .@i,countitem(.@i);
+      dispbottom  "[System] : คุณมี Cash ทั้งหมด "+ callfunc("F_InsertComma",#CASHPOINTS) +" Cash Points";
 #  - Id: 40016
 #    AegisName: MvP_Refine
 #    Name: MvP Refine
