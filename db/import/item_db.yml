@@ -114,10 +114,10 @@ Body:
     Script: |
       .@p = 1000000;
       .@i = 30004;
-      dispbottom "[System] : à¸„à¸¸à¸“à¹„à¸”à¹‰à¸£à¸±à¸š Cash "+ callfunc("F_InsertComma",(countitem(.@i)*(.@p)+(.@p))) +" Cash Points";
+      dispbottom "[System] : ¤Ø³ä´éÃÑº Cash "+ callfunc("F_InsertComma",(countitem(.@i)*(.@p)+(.@p))) +" Cash Points";
       #CASHPOINTS += (countitem(.@i)*(.@p)+(.@p));
       delitem .@i,countitem(.@i);
-      dispbottom  "[System] : à¸„à¸¸à¸“à¸¡à¸µ Cash à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸” "+ callfunc("F_InsertComma",#CASHPOINTS) +" Cash Points";
+      dispbottom  "[System] : ¤Ø³ÁÕ Cash ·Ñé§ËÁ´ "+ callfunc("F_InsertComma",#CASHPOINTS) +" Cash Points";
 #  - Id: 40016
 #    AegisName: MvP_Refine
 #    Name: MvP Refine

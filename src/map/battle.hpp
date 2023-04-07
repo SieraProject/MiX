@@ -419,7 +419,7 @@ struct Battle_Config
 	int max_def, over_def_bonus; //added by [Skotlex]
 
 	int zeny_from_mobs; // [Valaris]
-	int item_from_mobs; // [null]
+	int item_the_box; // [null]
 	int mobs_level_up; // [Valaris]
 	int mobs_level_up_exp_rate; // [Valaris]
 	int pk_min_level; // [celest]

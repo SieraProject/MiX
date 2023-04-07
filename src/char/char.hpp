@@ -196,6 +196,8 @@ struct CharServ_Config {
 	int autosave_interval;
 	int start_zeny;
 	int guild_exp_rate;
+	int guild_extension;
+	int guild_member;
 
 	int clan_remove_inactive_days;
 	int mail_return_days;
