@@ -18,7 +18,7 @@
 
 // Main NPC :: safety_Ref_NPC
 //============================================================
-prontera,184,177,6	script	Refine Master	851,{
+firstcity,182,251,5	script	Refine Master	851,{
 	disable_items;
 	setarray .@cert_weapon[0],
 		6864,	// Guarantee_Weapon_19Up
@@ -208,7 +208,8 @@ prontera,184,177,6	script	Refine Master	851,{
 		close;
 	}
 	delitem .@ticket_id,1;
-
+	
+	
 	// anti-hack
 	if (callfunc("F_IsEquipIDHack", .@part, .@refineitemid) ||
 		callfunc("F_IsEquipRefineHack", .@part, .@refinerycnt) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3])) {
@@ -229,4 +230,7 @@ prontera,184,177,6	script	Refine Master	851,{
 	mes "You look GREAT!";
 	mes "Farewell~!";
 	close;
+OnInit:
+	waitingroom "[•] ãªéãºµÕºÇ¡ÍØ»¡Ã³ì",0;
+end;	
 }

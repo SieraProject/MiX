@@ -393,6 +393,9 @@ function	script	refinenew	{
 	mes "don't have enough money";
 	mes "or "+getitemname(.@i[0])+".";
 	close;
+OnInit:
+	waitingroom "[ï] ·ª≈√ŸªÀ‘πµ’∫«°",0;
+end;
 }
 prt_in,85,71,5	duplicate(Austri#ref)	Austri#prt	826
 payon_in01,14,125,5	duplicate(Austri#ref)	Austri#pay	826

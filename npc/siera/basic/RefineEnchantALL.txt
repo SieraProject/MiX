@@ -1,0 +1,5 @@
+firstcity,185,254,5	duplicate(Hollgrehenn)	ช่างตีบวก	4_M_03
+firstcity,178,245,5	duplicate(Sratos#sratos)	Sratos	4_JP_GARM_H
+firstcity,188,257,5	duplicate(Austri#ref)	แปลรูปหินตีบวก	826
+firstcity,183,248,5	duplicate(Illusion Enchanter#0)	Illusion Enchanter	4_GEFFEN_09
+firstcity,186,248,5	duplicate(RS26#illusion_enchant)	Illusion Enchanter	4_SYS_MSG

@@ -64,6 +64,7 @@ grademk,34,184,4	script	Sratos#sratos	4_JP_GARM_H,{
 
 OnInit:
 	setunittitle(getnpcid(0), "<Grade Enhancer>");
+	waitingroom "[•] Grade Item",0;
 	end;
 }
 

@@ -13,7 +13,7 @@
 //= 1.6 Added Illusion of Twins enchanter [Capuche]
 //= 1.7 Added Illusion of Luanda enchanter [Capuche]
 //============================================================
-
+/*
 //============================================================
 //= Illusion of Moonlight
 //============================================================
@@ -253,8 +253,8 @@ OnTouch:
 		npctalk "What kind of place is this?", "", bc_self;
 	end;
 }
-
-
+*/
+/*
 //============================================================
 //= Illusion of Vampire
 //============================================================
@@ -618,11 +618,11 @@ OnProgress:
 	progressbar_npc "000000",1;
 	end;
 }
-
+*/
 //============================================================
 //= Illusion of underwater
 //============================================================
-
+/*
 iz_d04_i,134,228,4	script	Horen#Horen	4_M_BIBI,{
 	if (checkweight(1201,3) == 0) {
 		mes "Conversation cannot proceed because you have too many items.";
@@ -646,11 +646,11 @@ iz_d04_i,134,228,4	script	Horen#Horen	4_M_BIBI,{
 	callshop( "barter_ill_underwater" );
 	end;
 }
-
+*/
 //============================================================
 //= Illusion of Frozen
 //============================================================
-
+/*
 // illusion exchange npc - trade items for illusion gears
 ice_dun02,153,18,3	script	Illusion Stone Research	4_M_ALCHE_B,{
 	disable_items;
@@ -815,7 +815,7 @@ ice_dun02,153,18,3	script	Illusion Stone Research	4_M_ALCHE_B,{
 	getitem .@reward_id[.@s],1;
 	close;
 }
-
+*/
 
 // illusion enhancing - enhance the illusion gears
 // note: unknown enhance rate
@@ -1372,7 +1372,7 @@ OnTouch:
 //============================================================
 //= Illusion of Turtle
 //============================================================
-
+/*
 // Exchange npc
 alberta,226,28,3	script	Equipment Researcher	4_TOWER_15,{
 	disable_items;
@@ -1529,7 +1529,7 @@ alberta,226,28,3	script	Equipment Researcher	4_TOWER_15,{
 	getitem .@reward,1;
 	close;
 }
-
+*/
 //============================================================
 //= Illusion of Twins
 //============================================================
@@ -1565,7 +1565,7 @@ OnInit:
 //============================================================
 //= Illusion of Luanda
 //============================================================
-
+/*
 // Exchange npc
 com_d02_i,234,266,6	script	Village Soap#Lu	4_M_ORIENT01,{
 	if (checkweight(1201,3) == 0) {
@@ -1703,3 +1703,4 @@ S_Data:
 	return (.@size/2);
 }
 
+*/

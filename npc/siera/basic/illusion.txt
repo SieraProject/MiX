@@ -1,0 +1,39 @@
+firstcity,180,248,5	script	Illusion Exchange	4_M_02,{
+	mes "[" + strnpcinfo(1) + "]";
+	mes "คุณต้องการจะทำอะไร";
+	switch(select("Illusion Of Moonlight","Illusion Of Vampire","Illusion Of Frozen","Illusion Of Abyss","Illusion Of Teddy bear","Illusion Of Luanda","Illusion Of Labyrinth","Illusion Of Underwater","Illusion Of Twin")){
+	case 1:
+		callshop "Illusion_Of_Moonlight";
+		end;
+	case 2:
+		callshop "Illusion_Of_Vampire";
+		end;
+	case 3:
+		callshop "Illusion_Of_Frozen";
+		end;
+	case 4:
+		callshop "Illusion_Of_Abyss";
+		end;
+	case 5:
+		callshop "Illusion_Of_Teddy_bear";
+		end;
+	case 6:
+		callshop "Illusion_Of_Luanda";
+		end;
+	case 7:
+		callshop "Illusion_Of_Labyrinth";
+		end;
+	case 8:
+		callshop "Illusion_Of_Underwater";
+		end;
+	case 9:
+		callshop "Illusion_Of_Twin";
+		end;
+	case 10:
+		end;
+	}
+
+OnInit:
+	waitingroom "[•] Illusion Exchange",0;
+end;
+}
