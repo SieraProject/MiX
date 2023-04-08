@@ -1252,11 +1252,14 @@ ACMD_FUNC(alive)
  *------------------------------------------*/
 ACMD_FUNC(kami)
 {
+	struct map_session_data* pl_sd;
+	struct s_mapiterator* iter;
 	unsigned long color=0;
 	nullpo_retr(-1, sd);
 
 	memset(atcmd_output, '\0', sizeof(atcmd_output));
 
+	iter = mapit_getallusers();
 	if(*(command + 5) != 'c' && *(command + 5) != 'C') {
 		if (!message || !*message) {
 			clif_displaymessage(fd, msg_txt(sd,980)); // Please enter a message (usage: @kami <message>).
@@ -1264,10 +1267,16 @@ ACMD_FUNC(kami)
 		}
 
 		sscanf(message, "%255[^\n]", atcmd_output);
-		if (strstr(command, "l") != NULL)
+		if (strstr(command, "l") != NULL){
+			for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
+				if (pl_sd->bl.m == sd->bl.m)
+					clif_soundeffect( pl_sd->bl, "anuncio.wav", 0, SELF );
 			clif_broadcast(&sd->bl, atcmd_output, strlen(atcmd_output) + 1, BC_DEFAULT, ALL_SAMEMAP);
-		else
+		}else{
+			for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
+				clif_soundeffect( pl_sd->bl, "anuncio.wav", 0, SELF );
 			intif_broadcast(atcmd_output, strlen(atcmd_output) + 1, (*(command + 5) == 'b' || *(command + 5) == 'B') ? BC_BLUE : BC_DEFAULT);
+		}
 	} else {
 		if(!message || !*message || (sscanf(message, "%20lx %199[^\n]", &color, atcmd_output) < 2)) {
 			clif_displaymessage(fd, msg_txt(sd,981)); // Please enter color and message (usage: @kamic <color> <message>).
@@ -1278,8 +1287,11 @@ ACMD_FUNC(kami)
 			clif_displaymessage(fd, msg_txt(sd,982)); // Invalid color.
 			return -1;
 		}
+		for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
+			clif_soundeffect( pl_sd->bl, "anuncio.wav", 0, SELF );
 		intif_broadcast2(atcmd_output, strlen(atcmd_output) + 1, color, 0x190, 12, 0, 0);
 	}
+	mapit_free(iter);
 	return 0;
 }
 
@@ -5620,6 +5632,8 @@ ACMD_FUNC(exp)
  *------------------------------------------*/
 ACMD_FUNC(broadcast)
 {
+	struct map_session_data* pl_sd;
+	struct s_mapiterator* iter;
 	nullpo_retr(-1, sd);
 
 	memset(atcmd_output, '\0', sizeof(atcmd_output));
@@ -5629,9 +5643,14 @@ ACMD_FUNC(broadcast)
 		return -1;
 	}
 
+	iter = mapit_getallusers();
+	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
+	{
+		clif_soundeffect( pl_sd->bl, "anuncio.wav", 0, SELF );
+	}
 	sprintf(atcmd_output, "%s: %s", sd->status.name, message);
 	intif_broadcast(atcmd_output, strlen(atcmd_output) + 1, BC_DEFAULT);
-
+	mapit_free(iter);
 	return 0;
 }
 
@@ -5640,6 +5659,8 @@ ACMD_FUNC(broadcast)
  *------------------------------------------*/
 ACMD_FUNC(localbroadcast)
 {
+	struct map_session_data* pl_sd;
+	struct s_mapiterator* iter;
 	nullpo_retr(-1, sd);
 
 	memset(atcmd_output, '\0', sizeof(atcmd_output));
@@ -5649,9 +5670,15 @@ ACMD_FUNC(localbroadcast)
 		return -1;
 	}
 
+	iter = mapit_getallusers();
+	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
+	{
+		if (pl_sd->bl.m == sd->bl.m)
+			clif_soundeffect( pl_sd->bl, "anuncio.wav", 0, SELF );
+	}
 	sprintf(atcmd_output, "%s: %s", sd->status.name, message);
-
 	clif_broadcast(&sd->bl, atcmd_output, strlen(atcmd_output) + 1, BC_DEFAULT, ALL_SAMEMAP);
+	mapit_free(iter);
 
 	return 0;
 }
