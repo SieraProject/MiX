@@ -37,13 +37,13 @@ tb4_damage_rate: 1
 // Flee, Perfect Dodge Penalty (1 = Decrease by 1%)
 tb4_flee_penalty: 99
 
-// item from mobs drop all
-item_from_mobs: no
+// item the box mobs drop all
+item_the_box: no
 
 // MvP drop item (1 = 0.01%)
-item_rate_mvp_refine: 1
-item_1: 500
+//item_rate_mvp_refine: 1
+//item_1: 40016
 
 // Nomal drop item (1 = 0.01%)
-item_rate_the_box_key: 1
-item_2: 500
+//item_rate_the_box_key: 1
+//item_2: 40017

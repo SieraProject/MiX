@@ -14,6 +14,7 @@
 prontera,0,0,0	script	Goldpoint Manager::GOLDPCCAFE	4_F_02,{
 	// ID:AMOUNT:PRICE
 	setarray .items$[1],
+		"30001:1:1", // cash coin 1
 		"25464:1:2", // World_Tour_Ticket 1
 		"23919:1:10",  // K_Secret_Key 1
 		"23919:11:100",// K_Secret_Key 11
@@ -29,7 +30,7 @@ prontera,0,0,0	script	Goldpoint Manager::GOLDPCCAFE	4_F_02,{
 	for(.@i = 1; .@i < getarraysize(.items$); .@i++) {
 		explode(.@array$, .items$[.@i], ":");
 		.@cost = atoi(.@array$[2]);
-		.@menu$ += ":" + .@cost + " points gift";
+		.@menu$ += ":" + .@cost + " points gift "+atoi(.@array$[1])+" ea "+getitemname(atoi(.@array$[0]));
 		if( Goldpc_Points < .@cost ){
 			.@menu$ += " ^ff0000(not enough points)^000000";
 		}

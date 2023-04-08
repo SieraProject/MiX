@@ -118,6 +118,7 @@ Body:
       #CASHPOINTS += (countitem(.@i)*(.@p)+(.@p));
       delitem .@i,countitem(.@i);
       dispbottom  "[System] : คุณมี Cash ทั้งหมด "+ callfunc("F_InsertComma",#CASHPOINTS) +" Cash Points";
+### The Box Script item ###
 #  - Id: 40016
 #    AegisName: MvP_Refine
 #    Name: MvP Refine
