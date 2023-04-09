@@ -1,0 +1,114 @@
+//===== rAthena Script =======================================
+//= F_GetMobData
+//===== Author ===============================================
+//= llchrisll
+//===== Version ==============================================
+//= 1.0 - Initial Version
+//===== Tested With ==========================================
+//= rAthena 12/24/2017 Revision
+//= GIT Hash: ae69e506263f9b183c945f49b1d88c5fc2b73a6a
+//===== Description ==========================================
+//= F_GetMobData + mob_map_db are taken from my Dungeon Quest Service
+//  In the mob_map_db is every Mob ID in each Dungeon Map except Instances
+//  The function itself can retrieve these Mob ID's and give you an menu based on the Maps
+//  you put in the array.
+//  Like you can create an array which holds lots of Map Names, then call this function and
+//  get every Mob ID of these Maps
+//  It's also possible to get every Item Drop of each Mob with their drop chance, if requested
+//  But for that I used my F_Pages already to prevent the String Limitation error
+//  If you want to add more mobs to your DB, put .fill on '1' in the script at the end
+//===== Comments =============================================
+//= For the function to work you need the mob_map_db.sql installed
+//============================================================
+// Function to retrieve the Mob ID's or Item ID's from the SQL Database
+// Usage:
+// setarray .@array, < Map names >;
+// For Mob ID:
+// set .@id,F_GetMobData(implode(.@array$,":"));
+// For Item Drop:
+// set .@id,F_GetMobData(implode(.@array$,":"),1);
+function	script	F_GetMobData	{
+// getarg(0): Map Array
+// getarg(1): 0 = Mob ID, 1 = Item Drops
+if(query_sql("SHOW TABLES LIKE 'mob_map_db'",.@db) == 0) {
+	debugmes "F_GetMobData Function Error: SQL Table not loaded.";
+	return 0;
+}	
+explode(.@maps$,getarg(0),":");
+freeloop(1);
+for( set.@o,0; .@o < getarraysize(.@maps$); set .@o,.@o + 1) {
+	query_sql "SELECT `mob_id` FROM `mob_map_db` WHERE `map`  = '"+.@maps$[.@o]+"'",.@mob_id;
+	
+	if(getarraysize(.@mob_id) < 1)
+		return -1;
+		
+	for( set .@n,0; .@n < getarraysize(.@mob_id); set .@n,.@n +1) {
+		set .@c,0;
+		set .@f,0;
+		while( .@c < getarraysize(.@mobid) ) {
+			if(.@mob_id[.@n] == .@mobid[.@c]) 
+				set .@f,1;
+
+			set .@c,.@c + 1;
+		}
+		if(.@f) 
+			continue;
+		else 
+			setarray .@mobid[getarraysize(.@mobid)],.@mob_id[.@n];
+	}
+}
+if(getarg(1,0) == 0) {
+	for ( set .@n,0; .@n < getarraysize(.@mobid); set .@n,.@n +1)
+		set .@menu$,.@menu$ + "- "+strmobinfo(1,.@mobid[.@n]) + ((.@mobid[.@n+1] != 0)?":":"");
+
+	set .@m,select(.@menu$) - 1;
+
+	return .@mobid[.@m];
+	
+} else if(getarg(1,0) == 1) {
+	for ( set .@n,0; .@n < getarraysize(.@mobid); set .@n,.@n +1) {
+		getmobdrops(.@mobid[.@n]);
+		
+		for ( set .@i,0; .@i < $@MobDrop_count; set .@i,.@i +1) {
+			set .@c,0;
+			set .@f,0;
+			while( .@c < getarraysize(.@mobitem) ) {
+				if($@MobDrop_item[.@i] == .@mobitem[.@c]) 
+					set .@f,1;
+
+				set .@c,.@c + 1;
+			}
+			if(.@f) 
+				continue;
+			else {
+				setarray .@mobitem[getarraysize(.@mobitem)],$@MobDrop_item[.@i];
+				setarray .@mobrate[getarraysize(.@mobrate)],$@MobDrop_rate[.@i];
+			}
+		}
+	}
+	for ( set .@n,0; .@n < getarraysize(.@mobitem); set .@n,.@n +1)
+		setarray .@page$[getarraysize(.@page$)],"- "+getitemname(.@mobitem[.@n])+" ("+ .@mobrate[.@n]/100 + ((.@mobrate[.@n]%100 < 10) ? ".0":".") + .@mobrate[.@n]%100 + "%)";
+	
+	set .@m,callfunc("F_Pages",implode(.@page$,":"),20);
+	
+	freeloop(0);
+	return .@mobitem[.@m];
+}
+freeloop(0);
+debugmes "F_GetMobData Function Error!";
+return 0;
+}
+-	script	SQL_MobDB	-1,{
+
+OnInit:
+if(query_sql("SHOW TABLES LIKE 'mob_map_db'",.tbl) == 0) end; // SQL Table not installed
+set .fill,0; // Is this script active?
+set .gm,80; // GM Level
+end;
+
+OnNPCKillEvent:
+if(!.tbl || !.fill || getgmlevel() < .gm) end;
+if(query_sql("SELECT `mob_id` FROM `mob_map_db` WHERE `map` = '"+strcharinfo(3)+"' AND `mob_id` == '"+killedrid+"'",.@mob_id) == 0)
+	query_sql "INSERT INTO `mob_map_db` ( `mob_id` , `map` ) VALUES ( '"+killedrid+"' , '"+strcharinfo(3)+"' )";
+end;
+}

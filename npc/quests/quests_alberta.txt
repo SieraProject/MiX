@@ -617,7 +617,7 @@ alberta,120,53,1	script	Stylish Merchant#new30	51,{
 			next;
 			mes "[Zic]";
 			mes "Okay, I'll need...";
-			mes "1 ^0000FFHeart hairpin^000000";
+			mes "1 ^0000FFHeart Hairpin^000000";
 			mes "10 ^0000FFSteel^000000";
 			mes "...Did you know this already?";
 			close;
